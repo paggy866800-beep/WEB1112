@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENRI｜森裡 品牌經營分析報告</title>
+    <style>
+        /* ==========================================
+           RESET & BASIC STYLES
+           ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "PingFang TC", "Microsoft JhengHei", "Noto Serif TC", serif, sans-serif;
+            background-color: #F9F8F6; /* 暖米白 */
+            color: #332C27; /* 深褐/木質調文字 */
+            line-height: 1.8;
+            font-size: 18px; /* 適合閱讀的大小 */
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ==========================================
+           COLOR PALETTE & VARIABLES
+           ========================================== */
+        :root {
+            --primary-green: #4A6B5D;  /* 自然森林綠 */
+            --soft-green: #8B9D83;     /* 植物嫩綠 */
+            --warm-white: #F9F8F6;     /* 暖米白 */
+            --oat-beige: #EBE5DF;      /* 燕麥棕 */
+            --cocoa-brown: #5C4A3E;    /* 可可棕 */
+            --dark-text: #2D2723;      /* 深木色 */
+            --light-card: #FFFFFF;     /* 純白卡片背景 */
+            --shadow-subtle: 0 10px 30px rgba(74, 107, 93, 0.08);
+        }
+
+        /* ==========================================
+           LAYOUT & CONTAINER
+           ========================================== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--oat-beige);
+        }
+
+        /* ==========================================
+           NAVIGATION BAR
+           ========================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background-color: rgba(249, 248, 246, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--oat-beige);
+            padding: 16px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-green);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--dark-text);
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* ==========================================
+           HERO / COVER SECTION
+           ========================================== */
+        .hero {
+            background: linear-gradient(135deg, rgba(74, 107, 93, 0.9), rgba(92, 74, 62, 0.85)), 
+                        url('https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 140px 20px 100px 20px;
+            border-bottom: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 16px;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+        }
+
+        .hero p.subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            opacity: 0.95;
+        }
+
+        .hero-meta {
+            margin-top: 30px;
+            font-size: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            display: inline-block;
+            padding-top: 15px;
+        }
+
+        .hero-meta span {
+            font-weight: 600;
+            color: #E2E8F0;
+        }
+
+        /* ==========================================
+           TYPOGRAPHY & SECTION HEADERS
+           ========================================== */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .section-title p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* ==========================================
+           COLOR PALETTE SECTION (色彩辨識)
+           ========================================== */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .color-card {
+            background-color: var(--light-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--oat-beige);
+            text-align: center;
+        }
+
+        .color-swatch {
+            height: 100px;
+            width: 100%;
+        }
+
+        .color-info {
+            padding: 15px;
+        }
+
+        .color-name {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .color-code {
+            font-size: 15px;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        /* ==========================================
+           STORY & IDENTITY SECTION
+           ========================================== */
+        .story-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .story-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .story-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .story-content p {
+            margin-bottom: 18px;
+        }
+
+        .quote-box {
+            background-color: var(--oat-beige);
+            border-left: 4px solid var(--primary-green);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+            font-style: italic;
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--cocoa-brown);
+        }
+
+        /* ==========================================
+           CARDS & GRID LAYOUTS
+           ========================================== */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--light-card);
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid rgba(235, 229, 223, 0.8);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--warm-white);
+            padding-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .card li {
+            margin-bottom: 10px;
+        }
+
+        /* ==========================================
+           TABLES (STP & 4P/4C)
+           ========================================== */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--light-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            margin-top: 20px;
+        }
+
+        .custom-table th, .custom-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--oat-beige);
+        }
+
+        .custom-table th {
+            background-color: var(--primary-green);
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .custom-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .custom-table tr:nth-child(even) {
+            background-color: rgba(249, 248, 246, 0.5);
+        }
+
+        /* ==========================================
+           CONTACT SECTION (無表單純資訊)
+           ========================================== */
+        .contact-card {
+            background-color: var(--light-card);
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-subtle);
+            border: 2px solid var(--soft-green);
+            text-align: center;
+        }
+
+        .contact-info-list {
+            list-style: none;
+            margin-top: 30px;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .contact-info-list li {
+            font-size: 20px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--warm-white);
+            border: 1px solid var(--soft-green);
+            color: var(--primary-green);
+            border-radius: 50%;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+        footer {
+            background-color: var(--dark-text);
+            color: var(--warm-white);
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 16px;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部導覽列 -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">SENRI｜森裡</div>
+            <ul class="nav-links">
+                <li><a href="#cover">封面</a></li>
+                <li><a href="#colors">色彩辨識</a></li>
+                <li><a href="#story">品牌簡介</a></li>
+                <li><a href="#pest">PEST分析</a></li>
+                <li><a href="#swot">SWOT矩陣</a></li>
+                <li><a href="#stp">STP定位</a></li>
+                <li><a href="#marketing">4P/4C策略</a></li>
+                <li><a href="#contact">聯絡資訊</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 1. 封面 Section (包含主理人名字: Emily) -->
+    <section id="cover" class="hero">
+        <div class="hero-badge">品牌經營與市場策略專題報告</div>
+        <h1>SENRI｜森裡</h1>
+        <p class="subtitle">「陪你透過自然、香氣與手作，重新感受生活。」</p>
+        <div class="hero-meta">
+            專題主理人：<span>Emily</span> &nbsp;|&nbsp; 品牌定位：自然生活美學與手作體驗
+        </div>
+    </section>
+
+    <!-- 2. 色彩辨識 (Brand Identity & Color Palette) -->
+    <section id="colors">
+        <div class="container">
+            <div class="section-title">
+                <h2>品牌視覺色彩辨識 (Visual Identity)</h2>
+                <p>以自然、質感與柔和光線為主的品牌色彩系統</p>
+            </div>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #4A6B5D;"></div>
+                    <div class="color-info">
+                        <div class="color-name">森林綠 (Primary)</div>
+                        <div class="color-code">#4A6B5D</div>
+                        <p style="font-size: 14px; color: #666; margin-top: 6px;">象徵自然、植栽與靜謐力量</p>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #8B9D83;"></div>
+                    <div class="color-info">
+                        <div class="color-name">植物嫩綠 (Secondary)</div>
+                        <div class="color-code">#8B9D83</div>
+                        <p style="font-size: 14px; color: #666; margin-top: 6px;">傳遞舒緩、生命力與療癒感受</p>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #F9F8F6; border-bottom: 1px solid #ddd;"></div>
+                    <div class="color-info">
+                        <div class="color-name">暖米白 (Background)</div>
+                        <div class="color-code">#F9F8F6</div>
+                        <p style="font-size: 14px; color: #666; margin-top: 6px;">營造溫暖、簡約且放鬆的空間質感</p>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #EBE5DF;"></div>
+                    <div class="color-info">
+                        <div class="color-name">燕麥棕 (Accent)</div>
+                        <div class="color-code">#EBE5DF</div>
+                        <p style="font-size: 14px; color: #666; margin-top: 6px;">質樸、手作質感與大地連結</p>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: #5C4A3E;"></div>
+                    <div class="color-info">
+                        <div class="color-name">可可棕 (Text/Accent)</div>
+                        <div class="color-code">#5C4A3E</div>
+                        <p style="font-size: 14px; color: #666; margin-top: 6px;">沉穩、復古優雅與生活故事</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 品牌簡介與故事 -->
+    <section id="story">
+        <div class="container">
+            <div class="section-title">
+                <h2>品牌簡介與品牌故事</h2>
+                <p>信仰與自然之間，重新感受生活</p>
+            </div>
+            <div class="story-container">
+                <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80" alt="SENRI 香氛手作" class="story-img" onerror="this.src='https://placehold.co/600x400/4A6B5D/FFFFFF?text=SENRI+Scent'">
+                <div class="story-content">
+                    <p>人生有些轉變，往往從一個意想不到的相遇開始。曾經在低潮時期，主理人 Emily 偶然接觸了手作香氛蠟燭課程，在感受香氣與創作的過程中找到舒緩情緒的出口，也萌生了對芳香與手作的熱愛。</p>
+                    <p>後續擔任中央大学師母宿舍手作課程助教兩年，帶領多肉組盆體驗，體會到手作更是一段彼此陪伴、分享生活的時光。為求專業，Emily 進一步取得韓國天然精油調香證照，並透過 104 高年級平台累積教學經驗。</p>
+                    <div class="quote-box">
+                        「森裡，不只是一個自然手作品牌，更是將生命經歷、信仰與對生活美感的熱愛，慢慢匯聚而成的一份心意。」
+                    </div>
+                    <p><strong>核心體驗：</strong>自然 × 香氣 × 手作 × 人與人的交流</p>
+                    <p><strong>品牌個性：</strong>簡約、復古、自然、文青、優雅，帶有生活故事與手作溫度。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. PEST 外部環境分析 -->
+    <section id="pest">
+        <div class="container">
+            <div class="section-title">
+                <h2>PEST 外部環境分析</h2>
+                <p>從政治、經濟、社會與科技面向釐清外部大環境</p>
+            </div>
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">P 政治與法規</span>
+                    </div>
+                    <ul>
+                        <li>精油、蠟燭與手作課程嚴格規範。</li>
+                        <li>堅持產品不宣稱任何醫療效果，確保合法合規營運。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">E 經濟因素</span>
+                    </div>
+                    <ul>
+                        <li>初期與合作咖啡廳/特色店家合作，降低獨立工作室租金成本。</li>
+                        <li>主打精緻小班個人引導與場景美感體驗。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">S 社會因素</span>
+                    </div>
+                    <ul>
+                        <li>現代人重視「給自己一段手作時間」的療癒經濟。</li>
+                        <li>生活美學族群興起，偏好與好友共同參與質感體驗活動。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">T 科技因素</span>
+                    </div>
+                    <ul>
+                        <li>善用數位工具（Google搜尋、品牌官網、社群）累積信任。</li>
+                        <li>使用 Canva 製作視覺包裝與提案。</li>
+                        <li>利用線上報名與顧客管理系統順暢流程。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. SWOT 矩陣與策略分析 -->
+    <section id="swot">
+        <div class="container">
+            <div class="section-title">
+                <h2>SWOT 競爭力與交叉策略</h2>
+                <p>分析內部優劣勢與外部機會威脅，擬定具體行動方案</p>
+            </div>
+            <div class="grid-2" style="margin-bottom: 30px;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">S 內部優勢 (Strengths)</span>
+                    </div>
+                    <ul>
+                        <li>嗅覺敏銳、具備韓國天然精油調香專業認證。</li>
+                        <li>深刻了解消費者心態，能提供溫暖、細膩的一對一引導。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">W 內部劣勢 (Weaknesses)</span>
+                    </div>
+                    <ul>
+                        <li>品牌初期知名度待提升。</li>
+                        <li>初期尚未設立固定實體工作室。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">O 外部機會 (Opportunities)</span>
+                    </div>
+                    <ul>
+                        <li>具備 104 平台講師經歷，可直接上架課程開拓客源。</li>
+                        <li>跨界合作（咖啡廳、選品店）需求旺盛。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">T 外部威脅 (Threats)</span>
+                    </div>
+                    <ul>
+                        <li>同類手作市場價格競爭與材料成本波動。</li>
+                        <li>合作場地檔期限制與消費者預期落差。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary-green); margin-bottom: 20px; text-align: center;">SWOT 延伸策略 (SO, WO, ST, WT)</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4 style="color: var(--cocoa-brown); font-size: 20px; margin-bottom: 10px;">SO 策略 (優勢 × 機會)</h4>
+                    <p>結合104平台與咖啡廳，設計「自然×香氣×手作」主題體驗活動，將場地轉化為具美感的生活空間，快速建立固定客群。</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--cocoa-brown); font-size: 20px; margin-bottom: 10px;">WO 策略 (劣勢 × 機會)</h4>
+                    <p>以小班合作模式測試市場，透過高品質視覺包裝與網路社群宣傳，傳遞調香美學與實用安全知識，累積口碑與真實作品集。</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--cocoa-brown); font-size: 20px; margin-bottom: 10px;">ST 策略 (優勢 × 威脅)</h4>
+                    <p>透過課堂氛圍、香氣引導與帶課品質建立高度品牌識別，避免陷入單純材料或價格的低價競爭。</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--cocoa-brown); font-size: 20px; margin-bottom: 10px;">WT 策略 (劣勢 × 威脅)</h4>
+                    <p>建立標準化營運流程（最低開課人數、取消規則與材料備清單），確保初期成本控制與服務品質一致性。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. STP 市場區隔、目標市場與定位 -->
+    <section id="stp">
+        <div class="container">
+            <div class="section-title">
+                <h2>STP 市場定位策略</h2>
+                <p>精準切入目標族群，建立獨一無二的品牌地位</p>
+            </div>
+            
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">STP 面向</th>
+                        <th>內容說明與具體規劃</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>S 市場區隔 Segmentation</strong></td>
+                        <td>
+                            • 跳脫固定場域限制，採「咖啡廳聯名手作」與跨界店家合作模式。<br>
+                            • 主推走進自然、雙人或小團體體驗課程。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>T 目標市場 Targeting</strong></td>
+                        <td>
+                            • <strong>主要客群：</strong>喜歡手作的熟齡上班族（優先推廣精油蠟燭與調香）。<br>
+                            • <strong>延伸客群一：</strong>重視生活美感、喜愛與朋友共同體驗者（咖啡廳聯名/小團體）。<br>
+                            • <strong>延伸客群二：</strong>喜愛植物與居家佈置者（多肉、苔球與生態瓶課程）。
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>P 市場定位 Positioning</strong></td>
+                        <td>
+                            • 結合自然生活美學、細膩引導與人際交流，打造兼具故事溫度與高質感的精緻小班手作體驗。
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 7. 4P & 4C 與 服務業新4P 整合策略 -->
+    <section id="marketing">
+        <div class="container">
+            <div class="section-title">
+                <h2>4P 行銷策略 與 4C 顧客觀點</h2>
+                <p>全面整合賣方策略與買方價值需求</p>
+            </div>
+
+            <table class="custom-table" style="margin-bottom: 50px;">
+                <thead>
+                    <tr>
+                        <th>4P 行銷面向 (賣方觀點)</th>
+                        <th>森裡策略規劃</th>
+                        <th>對應 4C 顧客觀點 (買方觀點)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Product 產品</strong></td>
+                        <td>精油蠟燭、精油調香、植物手作體驗（多肉/苔球）。</td>
+                        <td><strong>Customer Value (顧客價值)：</strong>學習創作、生活美感、高隱私精緻一對一引導、無壓力探索香氣。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Price 價格</strong></td>
+                        <td>
+                            • 專屬調香體驗（30ml香水）：$1,500/人（享兩人同行優惠）<br>
+                            • 蝶谷巴特拼貼陶盆：$450<br>
+                            • 訊息(告白)蠟燭：$980<br>
+                            • 永生花/造型蠟燭：$1,200
+                        </td>
+                        <td><strong>Cost (顧客成本)：</strong>使用 Florihana 100% 天然精油，原料透明安心，並獲得專業諮詢與情感交流價值。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Place 通路</strong></td>
+                        <td>咖啡廳合作、特色選品店家、104高年級平台、官方網站與社群。</td>
+                        <td><strong>Convenience (便利性)：</strong>社區化在地店家，提供便利且富含氛圍的體驗場所。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Promotion 推廣</strong></td>
+                        <td>社群質感內容、短影片、SEO關鍵字搜尋、學員真實心得分享。</td>
+                        <td><strong>Communication (溝通)：</strong>清楚溝通體驗流程與適合對象，建立群組提供課後有效回覆。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: var(--primary-green); margin-bottom: 20px; text-align: center;">服務業新 4P 體驗品質管理</h3>
+            <div class="grid-4">
+                <div class="card">
+                    <h4 style="color: var(--cocoa-brown); font-size: 18px; margin-bottom: 8px;">① 人員 (People)</h4>
+                    <p style="font-size: 16px;">溫和、不催促地帶領課程，提供初學者貼心協助，尊重個人創作自由。</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--cocoa-brown); font-size: 18px; margin-bottom: 8px;">② 流程 (Process)</h4>
+                    <p style="font-size: 16px;">完整課前確認、順暢的課中引導與課後聯繫。採用線上付費與延課機制。</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--cocoa-brown); font-size: 18px; margin-bottom: 8px;">③ 實體展示 (Physical)</h4>
+                    <p style="font-size: 16px;">以暖米白與森裡綠建立視覺一致性，維持乾淨整潔的桌面與高品質包裝。</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: var(--cocoa-brown); font-size: 18px; margin-bottom: 8px;">④ 個人化 (Personalization)</h4>
+                    <p style="font-size: 16px;">課前了解手作經驗，提供專屬香氣建議，並建立系統化教學與模組化材料清單。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. 聯絡資訊 Section (取代原有的聯絡表單) -->
+    <section id="contact" style="background-color: var(--warm-white);">
+        <div class="container">
+            <div class="section-title">
+                <h2>聯絡我｜個人聯絡資訊</h2>
+                <p>歡迎品牌合作、課程預約與相關洽詢</p>
+            </div>
+            
+            <div class="contact-card">
+                <h3 style="font-size: 26px; color: var(--primary-green); margin-bottom: 10px;">SENRI｜森裡 品牌主理人</h3>
+                <p style="color: #666; font-size: 18px;">Emily</p>
+                
+                <ul class="contact-info-list">
+                    <li>
+                        <span class="contact-icon">👤</span>
+                        <span><strong>聯絡姓名：</strong>Emily</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">📞</span>
+                        <span><strong>聯絡電話：</strong>0986-680-086</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">✉️</span>
+                        <span><strong>電子郵件：</strong>paggy866800@gmail.com</span>
+                    </li>
+                    <li>
+                        <span class="contact-icon">🌐</span>
+                        <span><strong>官方網站：</strong><a href="https://paggy866800-beep.github.io/myweb1/" target="_blank" style="color: var(--primary-green); text-decoration: underline;">paggy866800-beep.github.io/myweb1</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 SENRI｜森裡. All Rights Reserved. Designed for Brand Presentation.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
